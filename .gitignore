@@ -1,0 +1,15 @@
+# Dot files that we don't care about.
+*.DS_Store
+.project
+.settings
+.buildpath
+
+# Compiled templates we do not want.
+templates_c/*
+
+# php my admin.
+
+a/
+
+# the idea project
+.idea
