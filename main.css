@@ -1,0 +1,172 @@
+.playlist_container {
+  width: 680px;
+  text-align:left;
+  border: 0 solid #DDD;
+}
+
+.playlist_header {
+  clear: both;
+  background-color: #EEE;
+  padding: 10px;
+  display:inline-block;
+  width: 660px;
+  text-align: right;
+}
+
+.video_container {
+  padding-left: 10px;
+}
+
+.playlist_header .explanation {
+  font-size: 0.9em;
+  color: #666;
+}
+
+#friends_status {
+  margin-top: 4px;
+  border: 1px dashed #CCC;
+  padding: 10px;
+  font-size: 0.9em;
+  color: #999;
+  background-color: #FAFAFF;
+}
+
+#interactions {
+  margin-left: 10px;
+  margin-top: 5px;
+  padding: 3px;
+  font-size: 0.9em;
+  color: #999;
+  background-color: #FAFAFF;
+  width: 445px;
+}
+
+.controls, .settings {
+  margin-top: 5px;
+  margin-bottom: -10px;
+  padding: 10px;
+  font-size: 15px;
+}
+.settings a {
+  font-size: 13px;
+  margin-left: 10px;
+}
+.settings {
+  line-height: 1.3em;
+}
+
+.controls a, .settings a {
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  cursor: hand;
+  color: #336;
+}
+.controls a:hover, .settings a:hover {
+  text-decoration: underline;
+}
+
+.right_column {
+  display: inline-block;
+}
+.profile_photo {
+  float: left;
+  margin-right: 4px;
+  display: inline-block;
+}
+
+.shared_by {
+  display: block;
+  padding-left: 10px;
+  font-size: 0.9em;
+}
+
+.coming_up_next {
+  display: block;
+  padding-left: 10px;
+  font-size: 0.9em;
+  margin-top: 20px;
+}
+
+.playlist_stats {
+  display: block;
+  padding-left: 10px;
+  font-size: 0.9em;
+  margin-top: 20px;
+}
+
+.coming_up_song {
+  margin-top: 10px;
+  display: block;
+}
+
+.separator {
+  clear: both;
+}
+.footer {
+  color: #666;
+  font-size: 0.9em;
+  margin-top: 15px;
+}
+.elevator_pitch {
+  font-size: 2em;
+  margin-bottom: 5px;
+}
+.hline {
+  height: 1px;
+  background-color: #DDD;
+  margin-top: 40px;
+}
+.about {
+  font-size: 0.9em;
+  color: #333;
+  margin-top: 15px;
+  line-height: 1.5em;
+}
+.play_count {
+  font-size: 11px;
+  color: #AAA;
+}
+.small {
+  font-size: 13px;
+}
+.video_title {
+  margin: 10px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.likes {
+  font-size: 12px;
+  display: inline-block;
+  border-top: 1px solid #FFF;
+  padding: 6px;
+  color: black;
+}
+
+.fb_comment {
+  font-size: 12px;
+  display: inline-block;
+  border-top: 1px solid #FFF;
+  padding: 6px;
+  color: black;
+}
+
+.icomment {
+  padding: 6px;
+}
+
+.icomment textarea {
+  color: #999;
+}
+.like_bar {
+  font-size: 12px;
+  margin-left: 10px;
+  margin-top: 10px;
+  color: #999;
+}
+
+.comment_name {
+  color: purple;
+  font-weight: bold;
+}
