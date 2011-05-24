@@ -100,7 +100,7 @@ function triggerCrawlFriend(opt_id) {
 
 function handleFriendsListBack(response) {
   if (response.error) {
-    alert('Error getting friends');
+    window.console.log('Error getting friends');
     return;
   }
   friendsArray = response.data;
@@ -148,7 +148,7 @@ function controlNext() {
 
 
 function isDeb() {
-  return document.location.href.indexOf("deb") > 0;
+  return document.location.href.indexOf("deb=1") > 0;
 }
 
 // ------------ some utility functions
