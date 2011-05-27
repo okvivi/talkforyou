@@ -6,11 +6,11 @@
 
 .playlist_header {
   clear: both;
-  background-color: #EEE;
+  background-color: #FAFAFA;
   padding: 10px;
   display:inline-block;
   width: 660px;
-  text-align: right;
+  text-align: left;
 }
 
 .video_container {
@@ -54,6 +54,9 @@
 .settings {
   line-height: 1.3em;
 }
+.settings a:hover {
+  text-decoration: underline;
+}
 
 .controls a, .settings a {
   text-decoration: none;
@@ -62,9 +65,11 @@
   cursor: hand;
   color: #336;
 }
-.controls a:hover, .settings a:hover {
+
+.controls a:hover {
   text-decoration: underline;
 }
+
 
 .right_column {
   display: inline-block;
@@ -79,13 +84,14 @@
   display: block;
   padding-left: 10px;
   font-size: 0.9em;
+  width: 450px;
+  margin-top: 10px;
 }
 
 .coming_up_next {
   display: block;
   padding-left: 10px;
   font-size: 0.9em;
-  margin-top: 20px;
 }
 
 .playlist_stats {
@@ -168,5 +174,4 @@
 
 .comment_name {
   color: purple;
-  font-weight: bold;
 }

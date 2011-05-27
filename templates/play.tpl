@@ -13,28 +13,15 @@
 
 <div id="fb-root"></div>
 <script src="http://connect.facebook.net/en_US/all.js"></script>
-<script>
-  {literal}
-  FB.init({
-  {/literal}
-    appId  : '{$app_id}',
-    status : true, // check login status
-    cookie : true, // enable cookies to allow the server to access the session
-    xfbml  : true  // parse XFBML
-  {literal}
-  });
-  {/literal}
-</script>
 
 <div class="playlist_header">
   <div class="profile_photo">
     <img src="http://graph.facebook.com/{$user_id}/picture?type=square"
-        width="50" height="50">
+        width="35" height="35">
   </div>
-  Hello <b>{$user_name}</b><br>
+  Konnichiwa <b>{$user_name}!</b><br>
   <div class="explanation">
-    You're listening to the videos and music that your friends shared on
-    facebook. If you leave it open it plays whatever is most recent and
+    Leave this open and it plays whatever is most recent and
     tries to find more shared songs from your friends.
   </div>
 </div>
@@ -63,16 +50,31 @@
       {/literal}
         swfobject.embedSWF(
             "http://www.youtube.com/e/{$video_id}?enablejsapi=1&playerapiid=ytplayer",
-            "ytapiplayer", "450", "330", "8", null, null, params, atts);
+            "ytapiplayer", "450", "300", "8", null, null, params, atts);
       </script>
     </div>
 
     <div class="like_bar" id="like_bar">
-      Posted a while ago -
+      Posted on {$shared_time|date_format:"%d %b %H:%M"} -
       <span id="like_button">
         <a href="javascript:like();">Like</a>
       </span>
     </div>
+
+    <div class="shared_by">
+      <img src="http://graph.facebook.com/{$shared_by_id}/picture?type=square"
+        width="30" heigth="30" class="profile_photo">
+      Shared by
+      <span class="comment_name">
+        <a href="http://www.facebook.com/profile.php?id={$shared_by_id}"
+           target=_blank>
+        {$shared_by_name}
+        </a>
+      </span>
+      <span id="share_message" class="small"></span>
+      <div class="play_count">play count: {$play_count}</div>
+    </div>
+
     <div id="interactions">
       <div id="likes" class="likes"></div>
       <div id="comments"></div>
@@ -87,24 +89,24 @@
   </td>
   <td valign="top">
     <div class="right_column">
-      <div class="shared_by">
-        <img src="http://graph.facebook.com/{$shared_by_id}/picture?type=square"
-          width="50" heigth="50" class="profile_photo">
-        From {$shared_by_name}
-        <br>{$shared_time|date_format:"%d %b %H:%M"}
-        <div class="play_count">play count: {$play_count}</div>
-      </div>
-      <div class="separator"></div>
+
       <div class="coming_up_next">
         <b>The next few songs</b>
 
-        {section name=song loop=$coming_up max=4}
+        {section name=song loop=$coming_up max=5}
           <div class="coming_up_song small">
             <a href="./?head={$coming_up[song].next_time}&play=1">
             <img src="http://img.youtube.com/vi/{$coming_up[song].video_id}/2.jpg"
-                width="50" height="30" style="float:left;margin-right:10px;" border=0>
+                width="50" height="35" style="float:left;margin-right:7px;" border=0>
             </a>
-            from {$coming_up[song].shared_by_name}
+            {$coming_up[song].title|truncate:20:'...':true}<br>
+            from
+            <span class="comment_name">
+              <a href="http://www.facebook.com/profile.php?id={$coming_up[song].shared_by_id}"
+                 target=_blank>
+                {$coming_up[song].shared_by_name}
+              </a>
+            </span>
             <div class="play_count">play count: {$coming_up[song].play_count}</div>
           </div>
           <div class="separator"></div>

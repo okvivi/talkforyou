@@ -19,7 +19,10 @@
   </td>
   <td>
     <div class="small">
-    by {$head[h].shared_by_name}
+    by
+    <a href="http://www.facebook.com/profile.php?id={$head[h].shared_by_id}">
+      {$head[h].shared_by_name}
+    </a>
     </div>
   </td>
   <td>

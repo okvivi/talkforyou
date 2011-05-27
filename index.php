@@ -50,7 +50,7 @@ $t->assign('user_id', $user['id']);
 
 assignPrefsToTemplate($t);
 
-$songs = getNextSongs($user['id'], $head, 5,
+$songs = getNextSongs($user['id'], $head, 6,
     $PREFS['unplayed'], $PREFS['music'], $PREFS['shuffle']);
 
 if (sizeof($songs) == 0) {
@@ -60,7 +60,7 @@ if (sizeof($songs) == 0) {
   $results = getVideoObjects($access_token);
   putResultsInDatabase($user['id'], $results);
 
-  $songs = getNextSongs($user['id'], $head, 5,
+  $songs = getNextSongs($user['id'], $head, 6,
       $PREFS['unplayed'], $PREFS['music'], $PREFS['shuffle']);
 
   // If I still don't have a song, exit.
@@ -72,7 +72,7 @@ while (!renderCurrentSong($t, $songs[0], $head, $user['id'])) {
       $PREFS['unplayed'], $PREFS['music'], $PREFS['shuffle']);
 }
 
-renderComingUpNext($t, array_slice($songs, 1, 4));
+renderComingUpNext($t, array_slice($songs, 1, 5));
 
 $t->assign('unplayed_count', getSongsCount($user['id'], false));
 $t->assign('played_count', getSongsCount($user['id'], true));

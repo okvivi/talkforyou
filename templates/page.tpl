@@ -1,7 +1,11 @@
 <html>
   <title>A seamless playlist of all the songs that my friends share on Facebook</title>
   <script type="text/javascript" src="swfobject.js"></script>
-  <script src='main.js?id=4'></script>
+
+  <script src='js/net_utils.js'></script>
+  <script src='js/comments.js'></script>
+  <script src='js/main.js'></script>
+
   <link rel="stylesheet" href="main.css?id=3" />
   <script type="text/javascript">
   {literal}

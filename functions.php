@@ -359,6 +359,7 @@ function renderComingUpNext($t, $songs) {
     $songObject['shared_by_id'] = $song['source_id'];
     $songObject['shared_time'] = $song['time'];
     $songObject['play_count'] = $song['play_count'];
+    $songObject['title'] = $song['title'];
 
     $templateObjects[] = $songObject;
   }
