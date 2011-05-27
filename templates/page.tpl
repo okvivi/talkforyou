@@ -6,7 +6,7 @@
   <script src='js/comments.js'></script>
   <script src='js/main.js'></script>
 
-  <link rel="stylesheet" href="main.css?id=3" />
+  <link rel="stylesheet" href="main.css?id=4" />
   <script type="text/javascript">
   {literal}
   var _gaq = _gaq || [];
@@ -29,7 +29,7 @@
       <td>
       <a href="http://www.facebook.com/apps/application.php?id=151610438237720" target="_blank">Leave feedback</a>
       </td><td align="right">
-      <div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId=129592820452630&amp;xfbml=1"></script><fb:like href="http://talkforyou.me/" send="true" layout="button_count" width="170" show_faces="true" font=""></fb:like>
+      <div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId={$app_id}&amp;xfbml=1"></script><fb:like href="http://talkforyou.me/" send="true" layout="button_count" width="170" show_faces="true" font=""></fb:like>
       </td>
     </table>
   </div>

@@ -24,6 +24,9 @@ function runOnLoad() {
   });
 
   FB.getLoginStatus(function(response) {
+    log('Login status response:');
+    log(response);
+
     session = response.session;
     log('Got login status:');
     log(session);
