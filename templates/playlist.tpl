@@ -20,7 +20,7 @@
   <td>
     <div class="small">
     by
-    <a href="http://www.facebook.com/profile.php?id={$head[h].shared_by_id}">
+    <a href="http://www.facebook.com/profile.php?id={$head[h].source_id}">
       {$head[h].shared_by_name}
     </a>
     </div>

@@ -190,8 +190,17 @@ function getNextSongs($user_id, $head, $count, $unplayed, $music, $shuffle) {
   $cond = $unplayed == 'true' ?
     $cond = "AND (play_count = 0 OR time < '{$head}') " :
     $cond = "AND time < '{$head}' ";
+
+  if ($shuffle == 'true') {
+    $order = 'rand(' . time() . ')';
+    // Delete the condition with the head in this case, we want to randomize
+    // over everything.
+    $cond = $unplayed == 'true' ? 'AND play_count = 0' : '';
+  } else {
+    $order = 'time';
+  }
+
   if ($music == 'true')  $cond = $cond . " AND cat = 'Music' ";
-  $order = $shuffle == 'true' ? 'rand()' : 'time';
 
   $s = mysql_query("
     SELECT * FROM playlist
@@ -293,7 +302,7 @@ function getNextHead($user_id, $current_head) {
     $cond = $cond . " AND cat = 'Music' ";
   }
   if ($PREFS['shuffle'] == 'true') {
-    $order = 'rand()';
+    $order = 'rand(' . time() . ')';
   } else {
     $order = 'time';
   }
