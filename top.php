@@ -1,6 +1,6 @@
 <?php
   date_default_timezone_set('America/New_York');
-  $scope = "read_stream";
+  $scope = "read_stream,user_groups,offline_access";
 
   if ($_SERVER['SERVER_NAME'] == 'talkforyou.local') {
     $app_id = "129592820452630";

@@ -68,8 +68,13 @@
       <span class="comment_name">
         <a href="http://www.facebook.com/profile.php?id={$shared_by_id}"
            target=_blank>
-        {$shared_by_name}
-        </a>
+        {$shared_by_name}</a>
+
+      {if $shared_by_id != $shared_via && $shared_via != ''}
+        via <a href="http://www.facebook.com/profile.php?id={$shared_via}"
+           target=_blank>
+        {$shared_via_name}</a>
+      {/if}
       </span>
       <span id="share_message" class="small"></span>
       <div class="play_count">play count: {$play_count}</div>

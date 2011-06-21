@@ -33,7 +33,7 @@ if ($_GET['id'] == "-1") {
 
 }
 
-putResultsInDatabase($user['id'], $results);
+putResultsInDatabase($results, $friend->id, $friend->name);
 
 include_once('bottom.php');
 

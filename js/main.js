@@ -32,6 +32,7 @@ function runOnLoad() {
     log(session);
 
     FB.api("/me/friends", handleFriendsListBack);
+    FB.api("/me/groups", handleGroupsListBack);
     FB.api("/me/permissions", function(r) {
       permissions = r.data[0];
     });
@@ -119,6 +120,22 @@ function handleFriendsListBack(response) {
   friendsArray = response.data;
   // The first user we are crawling after the friends list is back is ME.
   setTimeout('triggerCrawlFriend(-1)', 500);
+}
+
+
+function handleGroupsListBack(response) {
+  if (response.error) {
+    window.console.log('Error getting groups');
+    return;
+  }
+
+  for (var i = 0; i < response.data.length; i++) {
+    if (response.data[i].version == 1) {
+      sendPayload_('group.php?id=' + response.data[i].id, function(response) {
+        // do nothing.
+      });
+    }
+  }
 }
 
 

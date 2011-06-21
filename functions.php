@@ -13,7 +13,7 @@ function getAccessToken($app_id, $my_url, $app_secret, $code) {
 
 function getUser($access_token, $id) {
   if (!$id) return;
-  $graph_url = "https://graph.facebook.com/{$id}?" . $access_token;
+  $graph_url = "https://graph.facebook.com/{$id}?access_token=" . $access_token;
   return json_decode(file_get_contents($graph_url));
 }
 
@@ -104,13 +104,15 @@ function getVideoObjects($access_token, $id="me", $pages=5) {
 }
 
 
-function putResultsInDatabase($user_id, $results) {
+function putResultsInDatabase($results, $shared_via, $shared_via_name) {
   $youtubeService = new Zend_Gdata_YouTube();
 
   for ($i = 0; $i < sizeof($results); $i++) {
     $r = $results[$i];
     $time = strtotime($r->created_time);
     $link = $r->link;
+    $user_id = $r->from->id;
+
     if (!$r->link || strpos($r->link, "youtu") === FALSE) {
       $link = $r->message;
       if (!$r->message || strpos($r->message, "youtu") === FALSE) {
@@ -134,6 +136,8 @@ function putResultsInDatabase($user_id, $results) {
       updatePlaylistField($user_id, $time, 'cat', $cat);
       updatePlaylistField($user_id, $time, 'title', $title);
       updatePlaylistField($user_id, $time, 'duration', $duration);
+      updatePlaylistField($user_id, $time, 'shared_via', $shared_via);
+      updatePlaylistField($user_id, $time, 'shared_via_name', $shared_via_name);
 
     } catch (Zend_Gdata_App_HttpException $ex) {
     } catch (Zend_Uri_Exception $zue) {
@@ -143,9 +147,10 @@ function putResultsInDatabase($user_id, $results) {
     mysql_query("
       INSERT IGNORE INTO
       playlist(user_id, time, link, source_id, cat, title,
-               duration, shared_by_name, fb_id)
+               duration, shared_by_name, fb_id, shared_via, shared_via_name)
       VALUES('{$user_id}', $time, '$link', '{$r->from->id}', '{$cat}',
-             '{$title}', '{$duration}', '{$r->from->name}', '{$r->id}')
+             '{$title}', '{$duration}', '{$r->from->name}', '{$r->id}',
+             '{$shared_via}', '{$shared_via_name}')
     ");
     updatePlaylistField($user_id, $time, 'fb_id', $r->id);
   }
@@ -352,6 +357,9 @@ function renderCurrentSong($t, $song, $head, $user_id) {
   $t->assign('shared_time', $song['time']);
   $t->assign('play_count', $song['play_count']);
   $t->assign('fb_id', $song['fb_id']);
+
+  $t->assign('shared_via', $song['shared_via']);
+  $t->assign('shared_via_name', $song['shared_via_name']);
 
   return true;
 }
