@@ -85,6 +85,7 @@ $playlist->assign('head', $headplaylist);
 $t->assign('playlist', $playlist->fetch('playlist.tpl'));
 
 $page = new Smarty();
+$page->assign('shared_songs', countSharedSongs());
 $page->assign('content', $t->fetch('play.tpl'));
 $page->display('page.tpl');
 

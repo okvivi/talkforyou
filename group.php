@@ -11,7 +11,11 @@ $authenticateOrDie = true;
 require_once('authenticate.php');
 $access_token = $facebook->getAccessToken();
 
-$group_id = (int)$_GET['id'];
+$group_id = $_GET['id'];
+if (!preg_match('/^([0-9]+)$/', $group_id)) {
+  return;
+}
+
 // Always get the first page on the stream in case something showed up.
 $results = getVideoObjects($access_token, $group_id, 1);
 

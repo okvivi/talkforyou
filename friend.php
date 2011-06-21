@@ -21,7 +21,10 @@ if ($_GET['id'] == "-1") {
       . "friend_id: 'me'})";
 
 } else {
-  $friend = getUser($access_token, (int)$_GET['id']);
+  if (!preg_match('/^([0-9]+)$/', $_GET['id'])) {
+    return;
+  }
+  $friend = getUser($access_token, $_GET['id']);
   // Always get the first page on the stream in case something showed up.
   $results = getVideoObjects($access_token, $friend->id, 1);
 
