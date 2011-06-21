@@ -11,6 +11,7 @@ $play = $_REQUEST["play"];
 if(empty($play)) {
   $c = new Smarty();
   $t = new Smarty();
+  $t->assign('shared_songs', countSharedSongs());
   $t->assign('content', $c->fetch('home.tpl'));
   $t->display('page.tpl');
   return;
@@ -58,7 +59,7 @@ if (sizeof($songs) == 0) {
   // or when the user is rewinding to the very beginning. All other times (when
   // head is set in the url) we don't want to be fast.
   $results = getVideoObjects($access_token);
-  putResultsInDatabase($user['id'], $results);
+  putResultsInDatabase($results, $user['id'], $user['name']);
 
   $songs = getNextSongs($user['id'], $head, 6,
       $PREFS['unplayed'], $PREFS['music'], $PREFS['shuffle']);

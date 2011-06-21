@@ -383,4 +383,12 @@ function renderComingUpNext($t, $songs) {
   $t->assign('coming_up', $templateObjects);
 }
 
+
+function countSharedSongs() {
+  $q = mysql_query('SELECT count(*) as num FROM playlist');
+  if ($r = mysql_fetch_array($q)) {
+    return $r['num'];
+  }
+  return '0';
+}
 ?>
