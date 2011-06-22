@@ -17,7 +17,7 @@ if ($_GET['id'] == "-1") {
   $results = getVideoObjects($access_token, "me", 1);
 
   echo "({video_count: '" . sizeof($results)
-      . "', name: '" . $user->name . "', "
+      . "', name: '" . $user['name'] . "', "
       . "friend_id: 'me'})";
 
 } else {
@@ -36,7 +36,7 @@ if ($_GET['id'] == "-1") {
 
 }
 
-putResultsInDatabase($results, $friend->id, $friend->name);
+putResultsInDatabase($results, $user['id'], $friend->id, $friend->name);
 
 include_once('bottom.php');
 

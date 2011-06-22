@@ -24,7 +24,7 @@ echo "({video_count: '" . sizeof($results)
     . "friend_id: '" . $group_id . "'})";
 
 $group = getUser($access_token, $group_id);
-putResultsInDatabase($results, $group_id, $group->name);
+putResultsInDatabase($results, $user['id'], $group_id, $group->name);
 
 include_once('bottom.php');
 

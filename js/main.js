@@ -5,6 +5,7 @@ var session = null;
 var permissions = null;
 var commentPending = false;
 var likeArray = [];
+var groupsArray = [];
 
 /**
  * Starts the background processes after the page loads. This is the parsing
@@ -129,12 +130,53 @@ function handleGroupsListBack(response) {
     return;
   }
 
+  var out = [];
+
   for (var i = 0; i < response.data.length; i++) {
-    if (response.data[i].version == 1) {
+    var group = response.data[i];
+    if (group.version == 1) {
       sendPayload_('group.php?id=' + response.data[i].id, function(response) {
         // do nothing.
       });
+      // Make pretty checkboxes here.
+      var checked = document.location.href.indexOf(group.id) > 0;
+
+      out.push('<div class="groups_item">')
+      out.push('<input id="' + group.id + '" type="checkbox" name="' +
+               group.id + '" ');
+      if (checked) {
+        out.push(' checked');
+      }
+      out.push('>');
+      out.push('<label for="' + group.id + '">' + group.name + '</label>');
+      out.push('</div>');
+
+      groupsArray.push(group);
     }
+  }
+  var list = document.getElementById('groups_list');
+  list.innerHTML = out.join('');
+}
+
+
+/**
+ * When the user clicks the button to filter the playlist by a certain list of
+ * groups, we call this method.
+ */
+function filterByGroups() {
+  var param_value = [];
+  for (var i = 0; i < groupsArray.length; i++) {
+    var cb = document.getElementById(groupsArray[i].id);
+    if (cb.checked) {
+      param_value.push(groupsArray[i].id);
+    }
+  }
+  if (param_value.length > 0) {
+    document.location.href = myUrl + '?play=1&rehead=1' +
+        '&fid=' + currentFriend + '&groups_filter=' + param_value.join(',');
+  } else {
+    document.location.href = myUrl + '?play=1&rehead=1' +
+        '&fid=' + currentFriend;
   }
 }
 
@@ -163,7 +205,7 @@ function onytplayerStateChange(newState) {
   globalYtState = newState;
   if (newState == 0) {
     document.location.href = myUrl + '?play=1&head=' + next_head
-        + '&fid=' + currentFriend;
+        + '&fid=' + currentFriend + '&groups_filter=' + groups_filter.join(',');
   }
   if (newState == -1) {
     // If a song doesn't start playing in 5 seconds.
@@ -180,11 +222,13 @@ function checkPlaying() {
 }
 
 function controlRewind() {
-  document.location.href = myUrl + '?play=1&rehead=1';
+  document.location.href = myUrl + '?play=1&rehead=1&groups_filter=' +
+      groups_filter.join(',');
 }
 
 function controlNext() {
-  document.location.href = myUrl + '?play=1&head=' + next_head;
+  document.location.href = myUrl + '?play=1&head=' + next_head
+      + '&groups_filter=' + groups_filter.join(',');
 }
 
 

@@ -6,6 +6,7 @@ require_once('functions.php');
 Zend_Loader::loadClass('Zend_Gdata_YouTube');
 
 $play = $_REQUEST["play"];
+$groups_filter = $_REQUEST['groups_filter'];
 
 // Display the homepage if I don't have a code or a play parameter.
 if(empty($play)) {
@@ -59,7 +60,7 @@ if (sizeof($songs) == 0) {
   // or when the user is rewinding to the very beginning. All other times (when
   // head is set in the url) we don't want to be fast.
   $results = getVideoObjects($access_token);
-  putResultsInDatabase($results, $user['id'], $user['name']);
+  putResultsInDatabase($results, $user['id'], $user['id'], $user['name']);
 
   $songs = getNextSongs($user['id'], $head, 6,
       $PREFS['unplayed'], $PREFS['music'], $PREFS['shuffle']);
@@ -78,11 +79,17 @@ renderComingUpNext($t, array_slice($songs, 1, 5));
 $t->assign('unplayed_count', getSongsCount($user['id'], false));
 $t->assign('played_count', getSongsCount($user['id'], true));
 
+$t->assign('groups_filter', $groups_filter);
+
 $playlist = new Smarty();
 $playlist->assign('code', $code);
 $headplaylist = getNextSongs($user['id'], time(), 5, 'false', 'true', 'false');
 $playlist->assign('head', $headplaylist);
+
+$groups = new Smarty();
+
 $t->assign('playlist', $playlist->fetch('playlist.tpl'));
+$t->assign('groups', $groups->fetch('groups.tpl'));
 
 $page = new Smarty();
 $page->assign('shared_songs', countSharedSongs());

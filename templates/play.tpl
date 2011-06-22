@@ -9,6 +9,8 @@
     var app_id = '{$app_id}';
     var user_name = '{$user_name}';
     var unplayed_count = {$unplayed_count};
+    var groups_filter = '{$groups_filter}'.split(',');
+
 </script>
 
 <div id="fb-root"></div>
@@ -100,7 +102,7 @@
 
         {section name=song loop=$coming_up max=5}
           <div class="coming_up_song small">
-            <a href="./?head={$coming_up[song].next_time}&play=1">
+            <a href="./?head={$coming_up[song].next_time}&play=1&groups_filter={$groups_filter}">
             <img src="http://img.youtube.com/vi/{$coming_up[song].video_id}/2.jpg"
                 width="50" height="35" style="float:left;margin-right:7px;" border=0>
             </a>
@@ -137,3 +139,6 @@
 <div id="friends_status">&nbsp;</div>
 
 {$playlist}
+<div class="hline"></div>
+
+{$groups}

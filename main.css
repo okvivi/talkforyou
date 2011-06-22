@@ -175,3 +175,13 @@
 .comment_name {
   color: purple;
 }
+
+.groups_container {
+  padding: 10px;
+}
+.groups_item {
+  padding: 5px;
+}
+#groups_list {
+  margin-top: 10px;
+}

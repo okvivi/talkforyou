@@ -104,14 +104,13 @@ function getVideoObjects($access_token, $id="me", $pages=5) {
 }
 
 
-function putResultsInDatabase($results, $shared_via, $shared_via_name) {
+function putResultsInDatabase($results, $user_id, $shared_via, $shared_via_name) {
   $youtubeService = new Zend_Gdata_YouTube();
 
   for ($i = 0; $i < sizeof($results); $i++) {
     $r = $results[$i];
     $time = strtotime($r->created_time);
     $link = $r->link;
-    $user_id = $r->from->id;
 
     if (!$r->link || strpos($r->link, "youtu") === FALSE) {
       $link = $r->message;
@@ -188,6 +187,27 @@ function updatePlaylistField($user_id, $time, $field, $value) {
   ");
 }
 
+function getGroupsWhere() {
+  // Okay, this is quite a hack to have this global like this.
+  global $groups_filter;
+
+  $groups = explode(",", $groups_filter);
+  if (sizeof($groups) == 0) {
+    return "1=1";
+  }
+
+  $clauses = array();
+
+  $str = "(";
+  foreach($groups as $group) {
+    $clauses[] = "shared_via = '{$group}'";
+  }
+  $str .= join(" OR ", $clauses);
+  $str .= ")";
+
+  return $str;
+}
+
 function getNextSongs($user_id, $head, $count, $unplayed, $music, $shuffle) {
   global $access_token;
 
@@ -207,11 +227,14 @@ function getNextSongs($user_id, $head, $count, $unplayed, $music, $shuffle) {
 
   if ($music == 'true')  $cond = $cond . " AND cat = 'Music' ";
 
+  $groups_where = getGroupsWhere();
+
   $s = mysql_query("
     SELECT * FROM playlist
     WHERE user_id = '{$user_id}' {$cond}
       AND link != ''
       AND link not like '%vimeo%'
+      AND {$groups_where}
     GROUP BY link
     ORDER BY {$order} DESC
     LIMIT 0, {$count}
