@@ -407,11 +407,21 @@ function renderComingUpNext($t, $songs) {
 }
 
 
-function countSharedSongs() {
+function countSharedSongs($smarty) {
   $q = mysql_query('SELECT count(*) as num FROM playlist');
   if ($r = mysql_fetch_array($q)) {
-    return $r['num'];
+    $num = $r['num'];
+
+    $smarty->assign('d1', $num % 10); $num = (int)$num / 10;
+    $smarty->assign('d2', $num % 10); $num = (int)$num / 10;
+    $smarty->assign('d3', $num % 10); $num = (int)$num / 10;
+    $smarty->assign('d4', $num % 10); $num = (int)$num / 10;
+    $smarty->assign('d5', $num % 10); $num = (int)$num / 10;
+    if ($num % 10 > 0) {
+      $smarty->assign('d6', $num % 10);
+    }
+  } else {
+    $smarty->assign('d1', '0');
   }
-  return '0';
 }
 ?>

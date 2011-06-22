@@ -4,9 +4,9 @@
 
   <script src='js/net_utils.js'></script>
   <script src='js/comments.js'></script>
-  <script src='js/main.js?v=1'></script>
+  <script src='js/main.js?v=2'></script>
 
-  <link rel="stylesheet" href="main.css?id=4" />
+  <link rel="stylesheet" href="main.css?id=5" />
   <script type="text/javascript">
   {literal}
   var _gaq = _gaq || [];
@@ -30,7 +30,7 @@
       <a href="http://www.facebook.com/apps/application.php?id=151610438237720" target="_blank">Leave feedback</a>
       </td>
       <td align="center">
-        <b>{$shared_songs}</b> songs indexed so far
+        <span class="counter">{$d6}{$d5}{$d4},{$d3}{$d2}{$d1}</span> songs indexed so far
       </td>
       <td align="right">
       <div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId={$app_id}&amp;xfbml=1"></script><fb:like href="http://talkforyou.me/" send="true" layout="button_count" width="170" show_faces="true" font=""></fb:like>

@@ -185,3 +185,7 @@
 #groups_list {
   margin-top: 10px;
 }
+.counter {
+  font-weight: bold;
+  font-size: 16px;
+}

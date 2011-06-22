@@ -12,7 +12,7 @@ $groups_filter = $_REQUEST['groups_filter'];
 if(empty($play)) {
   $c = new Smarty();
   $t = new Smarty();
-  $t->assign('shared_songs', countSharedSongs());
+  countSharedSongs($t);
   $t->assign('content', $c->fetch('home.tpl'));
   $t->display('page.tpl');
   return;
@@ -92,7 +92,7 @@ $t->assign('playlist', $playlist->fetch('playlist.tpl'));
 $t->assign('groups', $groups->fetch('groups.tpl'));
 
 $page = new Smarty();
-$page->assign('shared_songs', countSharedSongs());
+countSharedSongs($page);
 $page->assign('content', $t->fetch('play.tpl'));
 $page->display('page.tpl');
 
