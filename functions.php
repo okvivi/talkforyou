@@ -129,7 +129,7 @@ function putResultsInDatabase($results, $user_id, $shared_via, $shared_via_name)
       $entry = $youtubeService->getVideoEntry($videoId);
 
       $cat = $entry->getVideoCategory();
-      $title = $entry->getVideoTitle();
+      $title = mysql_real_escape_string($entry->getVideoTitle());
       $duration = $entry->getVideoDuration();
 
       updatePlaylistField($user_id, $time, 'cat', $cat);
