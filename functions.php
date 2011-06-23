@@ -192,7 +192,7 @@ function getGroupsWhere() {
   global $groups_filter;
 
   $groups = explode(",", $groups_filter);
-  if (sizeof($groups) == 0) {
+  if (sizeof($groups) == 1 && $groups[0] == "") {
     return "1=1";
   }
 
@@ -229,7 +229,7 @@ function getNextSongs($user_id, $head, $count, $unplayed, $music, $shuffle) {
 
   $groups_where = getGroupsWhere();
 
-  $s = mysql_query("
+  $sql = "
     SELECT * FROM playlist
     WHERE user_id = '{$user_id}' {$cond}
       AND link != ''
@@ -238,7 +238,8 @@ function getNextSongs($user_id, $head, $count, $unplayed, $music, $shuffle) {
     GROUP BY link
     ORDER BY {$order} DESC
     LIMIT 0, {$count}
-  ");
+  ";
+  $s = mysql_query($sql);
   $results = array();
 
   if (mysql_num_rows($s) == 0) {
