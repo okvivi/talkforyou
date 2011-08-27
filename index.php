@@ -33,6 +33,7 @@ $t = new Smarty();
 // We take it from the prefs for when you come back.
 $head = (int)$_GET["head"] > 0 ? (int)$_GET["head"] : $PREFS['head'];
 setUserPref($user['id'], 'head', $head);
+setUserPref($user['id'], 'token', $access_token);
 
 if ((int)$_GET["rehead"] > 0) {
   $head = time();

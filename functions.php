@@ -53,6 +53,7 @@ function assignPrefsToTemplate($t) {
 
 
 function setUserPref($user_id, $pref, $value) {
+  if (!$user_id) return;
   // Delete the old value.
   mysql_query("
     DELETE FROM prefs

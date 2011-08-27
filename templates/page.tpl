@@ -21,6 +21,7 @@
   {/literal}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta property="fb:app_id" content="151610438237720" />
 <body onLoad='javascript:runOnLoad()'>
 <center>
 <div class="playlist_container">
